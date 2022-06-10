@@ -1,6 +1,7 @@
 ﻿using DevInSales.Context;
 using DevInSales.DTOs;
 using DevInSales.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +44,33 @@ namespace DevInSales.Controllers
             };
 
             return Ok(new { result });
+        }
+
+        [HttpGet("endpoint-aberto")]
+        public ActionResult EndpontAberto()
+        {
+            return Ok(new { Message = "Bem vindo ao endpoint aberto! =)" });
+        }
+
+        [HttpGet("endpoint-usuario")]
+        [Authorize(Roles = "Usuário, Gerente, Administrador")]
+        public ActionResult EndpontUsuario()
+        {
+            return Ok(new { Message = "Bem vindo ao endpoint do usuário! =)" });
+        }
+
+        [HttpGet("endpoint-gerente")]
+        [Authorize(Roles = "Gerente, Administrador")]
+        public ActionResult EndpontGerente()
+        {
+            return Ok(new { Message = "Bem vindo ao endpoint do gerente! =)" });
+        }
+
+        [HttpGet("endpoint-adm")]
+        [Authorize(Roles = "Administrador")]
+        public ActionResult EndpontAdm()
+        {
+            return Ok(new { Message = "Bem vindo ao endpoint do adm! =)" });
         }
     }
 }

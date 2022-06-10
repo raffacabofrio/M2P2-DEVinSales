@@ -9,10 +9,24 @@ namespace DevInSales.Services
     public static class TokenService
     {
 
+        // TODO: usar esse service por injeção de dependência.
+        
+        //private static IConfiguration _configuration;
+
+        //static TokenService(IConfiguration config)
+        //{
+        //    _configuration = config;
+        //}
+
         public static string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("9fKuQPjkxtHMQrm3RKFq2jLqTFz4b3V25Ef8ah8wmeHPwnU2zxpgjx4XVArSs9an");
+
+            // TODO: obter da configuração
+            // var secret = _configuration["TokenConfigurations:SecretJwtKey"];
+            var secret = "9fKuQPjkxtHMQrm3RKFq2jLqTFz4b3V25Ef8ah8wmeHPwnU2zxpgjx4XVArSs9an";
+
+            var key = Encoding.ASCII.GetBytes(secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

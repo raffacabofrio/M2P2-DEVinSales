@@ -26,7 +26,8 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddDbContext<SqlContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("ServerConnection")));
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
-
+// TODO: dar um nome diferente pra essa config.
+var secret = builder.Configuration.GetValue<string>("TokenConfigurations:SecretJwtKey");
 var key = Encoding.ASCII.GetBytes("9fKuQPjkxtHMQrm3RKFq2jLqTFz4b3V25Ef8ah8wmeHPwnU2zxpgjx4XVArSs9an");
 
 builder.Services.AddAuthentication(o =>
